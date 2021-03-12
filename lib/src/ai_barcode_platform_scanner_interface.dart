@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'ai_barcode_platform_interface.dart';
 
+typedef AiBarcodeScannerResultCallback = void Function(String result);
+
 /// AiBarcodeScannerPlatform
 abstract class AiBarcodeScannerPlatform extends ChangeNotifier
     with AiBarcodePlatform {
@@ -12,6 +14,10 @@ abstract class AiBarcodeScannerPlatform extends ChangeNotifier
   /// skip the verification that the class isn't implemented with `implements`.
   @visibleForTesting
   bool get isMock => false;
+
+  ///
+  /// result list
+  List<AiBarcodeScannerResultCallback> _resultCallbackList = [];
 
   static AiBarcodeScannerPlatform _instance;
 
@@ -134,4 +140,44 @@ abstract class AiBarcodeScannerPlatform extends ChangeNotifier
   // This private method is called by the instance setter, which fails if the class is
   // implemented with `implements`.
   void _verifyProvidesDefaultImplementations() {}
+
+  ///
+  /// addResultCallback
+  bool addResultCallback(
+      AiBarcodeScannerResultCallback aiBarcodeScannerResultCallback) {
+    bool operate = true;
+    if (aiBarcodeScannerResultCallback == null) {
+      operate = false;
+    } else {
+      operate = true;
+      _resultCallbackList.add(aiBarcodeScannerResultCallback);
+    }
+
+    return operate;
+  }
+
+  ///
+  /// removeResultCallback
+  bool removeResultCallback(
+      AiBarcodeScannerResultCallback aiBarcodeScannerResultCallback) {
+    bool operate = true;
+    if (aiBarcodeScannerResultCallback == null) {
+      operate = false;
+    } else {
+      operate = true;
+      _resultCallbackList.remove(aiBarcodeScannerResultCallback);
+    }
+
+    return operate;
+  }
+
+  void notifyResultListenerCallback(String result) {
+    _resultCallbackList.forEach(
+      (element) {
+        if (element != null) {
+          element(result);
+        }
+      },
+    );
+  }
 }

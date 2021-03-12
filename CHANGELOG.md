@@ -1,6 +1,10 @@
+## [2.1.0]
+
+* improve something.
+
 ## [2.0.0] 
 
-* stable version
+* fix something.
 
 ## [0.0.1] 
 
