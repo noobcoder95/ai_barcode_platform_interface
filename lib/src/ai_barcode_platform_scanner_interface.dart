@@ -174,9 +174,7 @@ abstract class AiBarcodeScannerPlatform extends ChangeNotifier
   void notifyResultListenerCallback(String result) {
     _resultCallbackList.forEach(
       (element) {
-        if (element != null) {
-          element(result);
-        }
+        element(result);
       },
     );
   }
