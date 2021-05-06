@@ -13,7 +13,7 @@ abstract class AiBarcodeCreatorPlatform extends ChangeNotifier
   @visibleForTesting
   bool get isMock => false;
 
-  static AiBarcodeCreatorPlatform _instance;
+  static late AiBarcodeCreatorPlatform _instance;
 
   /// The default instance of [AiBarcodeCreatorPlatform] to use.
   ///
@@ -27,7 +27,7 @@ abstract class AiBarcodeCreatorPlatform extends ChangeNotifier
 
   String get initialValueOfCreator => _initialValueOfCreator;
 
-  set initialValueOfCreator(String initialValue) {
+  set initialValueOfCreator(String? initialValue) {
     if (initialValue == null || initialValue.isEmpty) {
       return;
     }
@@ -39,7 +39,7 @@ abstract class AiBarcodeCreatorPlatform extends ChangeNotifier
 
   String get unsupportedPlatformDescription => _unsupportedPlatformDescription;
 
-  set unsupportedPlatformDescription(String text) {
+  set unsupportedPlatformDescription(String? text) {
     if (text == null || text.isEmpty) {
       return;
     }
