@@ -19,7 +19,7 @@ abstract class AiBarcodeScannerPlatform extends ChangeNotifier
   /// result list
   List<AiBarcodeScannerResultCallback> _resultCallbackList = [];
 
-  static AiBarcodeScannerPlatform _instance;
+  static late AiBarcodeScannerPlatform _instance;
 
   bool _isStartCamera = false;
   bool _isStartCameraPreview = false;
@@ -50,7 +50,7 @@ abstract class AiBarcodeScannerPlatform extends ChangeNotifier
 
   String get unsupportedPlatformDescription => _unsupportedPlatformDescription;
 
-  set unsupportedPlatformDescription(String text) {
+  set unsupportedPlatformDescription(String? text) {
     if (text == null || text.isEmpty) {
       return;
     }
@@ -144,7 +144,7 @@ abstract class AiBarcodeScannerPlatform extends ChangeNotifier
   ///
   /// addResultCallback
   bool addResultCallback(
-      AiBarcodeScannerResultCallback aiBarcodeScannerResultCallback) {
+      AiBarcodeScannerResultCallback? aiBarcodeScannerResultCallback) {
     bool operate = true;
     if (aiBarcodeScannerResultCallback == null) {
       operate = false;
@@ -159,7 +159,7 @@ abstract class AiBarcodeScannerPlatform extends ChangeNotifier
   ///
   /// removeResultCallback
   bool removeResultCallback(
-      AiBarcodeScannerResultCallback aiBarcodeScannerResultCallback) {
+      AiBarcodeScannerResultCallback? aiBarcodeScannerResultCallback) {
     bool operate = true;
     if (aiBarcodeScannerResultCallback == null) {
       operate = false;
@@ -174,9 +174,7 @@ abstract class AiBarcodeScannerPlatform extends ChangeNotifier
   void notifyResultListenerCallback(String result) {
     _resultCallbackList.forEach(
       (element) {
-        if (element != null) {
-          element(result);
-        }
+        element(result);
       },
     );
   }
