@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'ai_barcode_platform_interface.dart';
@@ -87,6 +89,12 @@ abstract class AiBarcodeScannerPlatform extends ChangeNotifier
   startCamera() async {
     _isStartCamera = true;
     AiBarcodePlatform.methodChannelScanner.invokeMethod("startCamera");
+  }
+
+  ///
+  /// Receive barcode result
+  Stream receiveBarcodeResult() {
+    return AiBarcodePlatform.eventChannelScanner.receiveBroadcastStream();
   }
 
   ///
